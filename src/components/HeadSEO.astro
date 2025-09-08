@@ -28,9 +28,9 @@ const { title, description, ogImage } = Astro.props;
   type="image/svg+xml"
   href={`${Astro.site}favicon.svg`}
 />
-<title>{title}</title>
-<meta name="title" content={title} />
-<meta name="description" content={description} />
+<title>{title || "Swadisht - Delicious Meals Delivered"}</title>
+<meta name="title" content={title || "Swadisht - Delicious Meals Delivered"} />
+<meta name="description" content={description || "Order delicious tiffin, meals, and food online with Swadisht. Enjoy fast delivery, great taste, and excellent service."} />
 
 <meta property="og:type" content="website" />
 <meta property="og:url" content={canonicalURL} />

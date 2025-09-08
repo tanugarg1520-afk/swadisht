@@ -1,5 +1,6 @@
 ---
 import { buttonVariants } from "@/components/ui/button";
+import Logo from "@/components/Logo";
 ---
 
 <header
@@ -10,20 +11,45 @@ import { buttonVariants } from "@/components/ui/button";
   >
     <div class="flex gap-6 md:gap-10">
       <a href="/" class="flex items-center space-x-2">
-        <span class="inline-block font-bold">Home</span>
+        <Logo size="md" />
       </a>
     </div>
     <div class="flex flex-1 items-center justify-end space-x-4">
-      <nav class="flex items-center space-x-1">
+      <nav class="hidden md:flex items-center space-x-1">
         <a
-          href="https://github.com/"
-          target="_blank"
-          rel="noreferrer"
+          href="/"
           class={buttonVariants({ variant: 'ghost' })}
         >
-          Example link
+          Home
+        </a>
+        <a
+          href="/menu"
+          class={buttonVariants({ variant: 'ghost' })}
+        >
+          Menu
+        </a>
+        <a
+          href="/offers"
+          class={buttonVariants({ variant: 'ghost' })}
+        >
+          Offers
+        </a>
+        <a
+          href="/"
+          class={buttonVariants({ variant: 'outline' })}
+        >
+          Login
+        </a>
+        <a
+          href="/"
+          class={buttonVariants({ variant: 'default' })}
+        >
+          Sign Up
         </a>
       </nav>
+      <button class="md:hidden p-2" aria-label="Menu">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+      </button>
     </div>
   </div>
 </header>

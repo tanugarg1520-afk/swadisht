@@ -1,19 +1,63 @@
-<footer class="border-t py-6 md:px-8 md:py-0">
-  <div
-    class="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row"
-  >
-    <p
-      class="text-muted-foreground text-center text-sm leading-loose md:text-left"
-    >
-      Built with{' '}
-      <a
-        href="https://new.website"
-        target="_blank"
-        rel="noreferrer"
-        class="font-medium underline underline-offset-4"
-      >
-        new.website
-      </a>
-    </p>
+---
+import Logo from "@/components/Logo";
+---
+
+<footer class="border-t py-10 bg-accent/30">
+  <div class="container">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div class="flex flex-col items-start">
+        <Logo size="md" withTagline={true} />
+        <p class="text-muted-foreground text-sm mt-4 max-w-xs">
+          Delicious meals delivered right to your doorstep. Experience the taste of convenience.  
+        </p>
+      </div>
+
+      <div>
+        <h3 class="font-display font-semibold text-primary mb-4">Quick Links</h3>
+        <ul class="space-y-2">
+          <li><a href="/" class="text-sm hover:text-primary transition-colors">Home</a></li>
+          <li><a href="/menu" class="text-sm hover:text-primary transition-colors">Menu</a></li>
+          <li><a href="/offers" class="text-sm hover:text-primary transition-colors">Offers</a></li>
+          <li><a href="/my-orders" class="text-sm hover:text-primary transition-colors">My Orders</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="font-display font-semibold text-primary mb-4">Company</h3>
+        <ul class="space-y-2">
+          <li><a href="/about" class="text-sm hover:text-primary transition-colors">About Us</a></li>
+          <li><a href="/contact" class="text-sm hover:text-primary transition-colors">Contact</a></li>
+          <li><a href="/careers" class="text-sm hover:text-primary transition-colors">Careers</a></li>
+          <li><a href="/partner" class="text-sm hover:text-primary transition-colors">Partner With Us</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="font-display font-semibold text-primary mb-4">Legal</h3>
+        <ul class="space-y-2">
+          <li><a href="/terms" class="text-sm hover:text-primary transition-colors">Terms & Conditions</a></li>
+          <li><a href="/privacy" class="text-sm hover:text-primary transition-colors">Privacy Policy</a></li>
+          <li><a href="/shipping" class="text-sm hover:text-primary transition-colors">Shipping Policy</a></li>
+          <li><a href="/refund" class="text-sm hover:text-primary transition-colors">Refund Policy</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="border-t border-muted/60 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center">
+      <p class="text-muted-foreground text-sm">
+        &copy; {new Date().getFullYear()} Swadisht. All rights reserved.
+      </p>
+      <p class="text-muted-foreground text-sm mt-2 md:mt-0">
+        Built with
+        <a
+          href="https://new.website"
+          target="_blank"
+          rel="noreferrer"
+          class="text-primary hover:underline"
+        >
+          new.website
+        </a>
+      </p>
+    </div>
   </div>
 </footer>
