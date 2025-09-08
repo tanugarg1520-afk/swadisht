@@ -29,12 +29,20 @@ export default function LoginForm() {
     setSubmitStatus(null);
 
     try {
+      // Create FormData object for proper multipart form handling
+      const formDataObj = new FormData();
+      // Add each form field to the FormData object
+      formDataObj.append('email', formData.email);
+      formDataObj.append('name', formData.name);
+      formDataObj.append('phone', formData.phone);
+      formDataObj.append('form_name', formData.form_name);
+      // Convert boolean to string for the checkbox
+      formDataObj.append('agreeTerms', formData.agreeTerms ? 'true' : 'false');
+      formDataObj.append('userType', userType);
+      
       const response = await fetch("https://api.new.website/api/submit-form/", {
         method: "POST",
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-        body: JSON.stringify(formData),
+        body: formDataObj, // Use FormData object directly, no need for Content-Type header
       });
 
       if (response.ok) {

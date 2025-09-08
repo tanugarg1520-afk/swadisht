@@ -18,12 +18,18 @@ export default function ContactForm() {
     setSubmitStatus(null);
 
     try {
+      // Create FormData object for proper multipart form handling
+      const formDataObj = new FormData();
+      
+      // Add each form field to the FormData object
+      formDataObj.append('name', formData.name);
+      formDataObj.append('email', formData.email);
+      formDataObj.append('message', formData.message);
+      formDataObj.append('form_name', formData.form_name);
+      
       const response = await fetch("https://api.new.website/api/submit-form/", {
         method: "POST",
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-        body: JSON.stringify(formData),
+        body: formDataObj, // Use FormData object directly, no need for Content-Type header
       });
 
       if (response.ok) {
