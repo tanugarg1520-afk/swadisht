@@ -31,7 +31,7 @@ export default function Logo({ size = "md", withTagline = false }: LogoProps) {
         </span>
       </div>
       {withTagline && (
-        <span className="text-xs text-muted-foreground mt-1">Har din ghar jesa swad</span>
+        <span className="text-xs text-muted-foreground mt-1">Delicious meals, delivered</span>
       )}
     </div>
   );
