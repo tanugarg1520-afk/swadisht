@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import SimpleLoginForm from '@/components/SimpleLoginForm';
+import LoginForm from '@/components/LoginForm';
 import Logo from '@/components/Logo';
 import { ShoppingCart, Utensils, Pizza, Map, Clock } from 'lucide-react';
 ---
@@ -64,7 +64,7 @@ import { ShoppingCart, Utensils, Pizza, Map, Clock } from 'lucide-react';
         <!-- Right Content - Login Form -->
         <div class="flex justify-center lg:justify-end">
           <!-- KEEP ALL FORMS client:load !! DO NOT USE client:visible AS THIS CAUSES HYDRATION ISSUES!!-->
-          <SimpleLoginForm client:load />
+          <LoginForm client:load />
         </div>
       </div>
     </div>

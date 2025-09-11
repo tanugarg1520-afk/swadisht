@@ -4,13 +4,12 @@ import { LogIn, UserPlus, Mail, Phone, User, Facebook, CircleUser } from "lucide
 
 export default function LoginForm() {
   const [isLogin, setIsLogin] = useState(true);
-  // No separate userType state, now part of formData
+  const [userType, setUserType] = useState("consumer");
   const [formData, setFormData] = useState({
     email: "",
     name: "",
     phone: "",
     agreeTerms: false,
-    userType: "consumer",
     form_name: "Swadisht Login"
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -21,14 +20,6 @@ export default function LoginForm() {
     setFormData(prev => ({ 
       ...prev, 
       [name]: type === "checkbox" ? checked : value 
-    }));
-  };
-  
-  // Handle radio button changes separately
-  const handleUserTypeChange = (type: string) => {
-    setFormData(prev => ({
-      ...prev,
-      userType: type
     }));
   };
 
@@ -47,7 +38,7 @@ export default function LoginForm() {
       formDataObj.append('form_name', formData.form_name);
       // Convert boolean to string for the checkbox
       formDataObj.append('agreeTerms', formData.agreeTerms ? 'true' : 'false');
-      formDataObj.append('userType', formData.userType);
+      formDataObj.append('userType', userType);
       
       const response = await fetch("https://api.new.website/api/submit-form/", {
         method: "POST",
@@ -142,9 +133,8 @@ export default function LoginForm() {
               type="radio"
               id="consumer"
               name="userType"
-              value="consumer"
-              checked={formData.userType === "consumer"}
-              onChange={() => handleUserTypeChange("consumer")}
+              checked={userType === "consumer"}
+              onChange={() => setUserType("consumer")}
               className="mr-2 h-4 w-4 text-primary focus:ring-primary/50"
             />
             <label htmlFor="consumer" className="text-sm">Consumer</label>
@@ -154,9 +144,8 @@ export default function LoginForm() {
               type="radio"
               id="customer"
               name="userType"
-              value="customer"
-              checked={formData.userType === "customer"}
-              onChange={() => handleUserTypeChange("customer")}
+              checked={userType === "customer"}
+              onChange={() => setUserType("customer")}
               className="mr-2 h-4 w-4 text-primary focus:ring-primary/50"
             />
             <label htmlFor="customer" className="text-sm">Restaurant</label>
