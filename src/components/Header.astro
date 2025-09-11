@@ -1,6 +1,11 @@
 ---
 import { buttonVariants } from "@/components/ui/button";
 import Logo from "@/components/Logo";
+import UserProfileHeader from "@/components/UserProfileHeader";
+
+// In a real app, this would be determined by authentication state
+// For demo purposes, we'll use a URL param to simulate login state
+const isLoggedIn = Astro.url.pathname.includes('/home');
 ---
 
 <header
@@ -34,18 +39,24 @@ import Logo from "@/components/Logo";
         >
           Offers
         </a>
-        <a
-          href="/"
-          class={buttonVariants({ variant: 'outline' })}
-        >
-          Login
-        </a>
-        <a
-          href="/"
-          class={buttonVariants({ variant: 'default' })}
-        >
-          Sign Up
-        </a>
+        {isLoggedIn ? (
+          <UserProfileHeader client:load userName="John Doe" userAddress="Sector 12, New Delhi, 110085" />
+        ) : (
+          <>
+            <a
+              href="/"
+              class={buttonVariants({ variant: 'outline' })}
+            >
+              Login
+            </a>
+            <a
+              href="/"
+              class={buttonVariants({ variant: 'default' })}
+            >
+              Sign Up
+            </a>
+          </>
+        )}
       </nav>
       <button class="md:hidden p-2" aria-label="Menu">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>

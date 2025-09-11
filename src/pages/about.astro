@@ -1,0 +1,177 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { ShoppingCart, Utensils, Clock, Award, Users, Shield } from 'lucide-react';
+---
+
+<BaseLayout
+  title="About Us - Swadisht"
+  description="Learn more about Swadisht, our mission, vision, and the team behind your favorite food delivery service."
+>
+  <div class="bg-accent/50 py-10">
+    <div class="container">
+      <h1 class="text-3xl md:text-4xl font-bold font-display mb-4">About Us</h1>
+      <p class="text-muted-foreground max-w-2xl">
+        At Swadisht, we're committed to bringing the authentic taste of home-cooked meals right to your doorstep.
+      </p>
+    </div>
+  </div>
+
+  <!-- Our Story Section -->
+  <section class="py-16">
+    <div class="container">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 class="text-3xl font-bold font-display mb-6">Our Story</h2>
+          <p class="text-muted-foreground mb-4">
+            Founded in 2023, Swadisht was born from a simple idea: everyone deserves to enjoy delicious, homemade food even when they're too busy to cook it themselves.
+          </p>
+          <p class="text-muted-foreground mb-4">
+            Our founder, Abhinav Garg, noticed that while there were plenty of food delivery options available, very few offered the authentic taste and health benefits of traditional home cooking. That's when Swadisht was born - a platform dedicated to delivering "Har din ghar jesa swad" (home-like taste every day).
+          </p>
+          <p class="text-muted-foreground">
+            Today, we've grown into a beloved food delivery service with a network of passionate chefs and delivery partners across the city, all united by our commitment to quality, taste, and customer satisfaction.
+          </p>
+        </div>
+        <div class="bg-primary/10 p-8 rounded-xl">
+          <h3 class="text-xl font-display font-semibold mb-4 text-primary">Our Mission</h3>
+          <p class="mb-6">To bring the authentic taste of home-cooked meals to every household, making quality food accessible to all.</p>
+          
+          <h3 class="text-xl font-display font-semibold mb-4 text-primary">Our Vision</h3>
+          <p>To become the preferred choice for food delivery by consistently exceeding customer expectations and maintaining the highest standards of quality and service.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Values Section -->
+  <section class="py-16 bg-accent/30">
+    <div class="container">
+      <h2 class="text-3xl font-bold font-display mb-12 text-center">Our Core Values</h2>
+      
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-accent flex flex-col items-center text-center">
+          <div class="bg-primary/10 p-4 rounded-full mb-4">
+            <Utensils class="w-8 h-8 text-primary" />
+          </div>
+          <h3 class="text-xl font-semibold font-display mb-2">Quality</h3>
+          <p class="text-muted-foreground">We use only the freshest ingredients and maintain the highest standards in food preparation and delivery.</p>
+        </div>
+        
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-accent flex flex-col items-center text-center">
+          <div class="bg-primary/10 p-4 rounded-full mb-4">
+            <Award class="w-8 h-8 text-primary" />
+          </div>
+          <h3 class="text-xl font-semibold font-display mb-2">Authenticity</h3>
+          <p class="text-muted-foreground">We preserve traditional recipes and cooking methods to deliver authentic flavors that remind you of home.</p>
+        </div>
+        
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-accent flex flex-col items-center text-center">
+          <div class="bg-primary/10 p-4 rounded-full mb-4">
+            <Clock class="w-8 h-8 text-primary" />
+          </div>
+          <h3 class="text-xl font-semibold font-display mb-2">Reliability</h3>
+          <p class="text-muted-foreground">We value your time and ensure timely delivery of your orders, exactly as promised.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="py-16">
+    <div class="container">
+      <h2 class="text-3xl font-bold font-display mb-12 text-center">Meet Our Team</h2>
+      
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-accent">
+          <div class="aspect-square rounded-full bg-primary/10 mx-auto mb-6 overflow-hidden flex items-center justify-center">
+            <Users class="w-16 h-16 text-primary/70" />
+          </div>
+          <div class="text-center">
+            <h3 class="font-display font-semibold text-xl mb-1">Abhinav Garg</h3>
+            <p class="text-primary mb-2">Founder & CEO</p>
+            <p class="text-muted-foreground text-sm">
+              With a passion for traditional cuisine and technology, Abhinav leads our mission to deliver authentic homemade taste to every customer.
+            </p>
+          </div>
+        </div>
+        
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-accent">
+          <div class="aspect-square rounded-full bg-primary/10 mx-auto mb-6 overflow-hidden flex items-center justify-center">
+            <Users class="w-16 h-16 text-primary/70" />
+          </div>
+          <div class="text-center">
+            <h3 class="font-display font-semibold text-xl mb-1">Priya Sharma</h3>
+            <p class="text-primary mb-2">Head Chef</p>
+            <p class="text-muted-foreground text-sm">
+              A culinary expert with over 15 years of experience, Priya ensures that each dish meets our high standards of taste and quality.
+            </p>
+          </div>
+        </div>
+        
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-accent">
+          <div class="aspect-square rounded-full bg-primary/10 mx-auto mb-6 overflow-hidden flex items-center justify-center">
+            <Users class="w-16 h-16 text-primary/70" />
+          </div>
+          <div class="text-center">
+            <h3 class="font-display font-semibold text-xl mb-1">Rahul Verma</h3>
+            <p class="text-primary mb-2">Operations Manager</p>
+            <p class="text-muted-foreground text-sm">
+              Rahul oversees our delivery operations, ensuring that your food arrives hot, fresh, and on time, every time.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="py-16 bg-primary text-white">
+    <div class="container">
+      <h2 class="text-3xl font-bold font-display mb-12 text-center">What Our Customers Say</h2>
+      
+      <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div class="bg-white/10 backdrop-blur-sm p-6 rounded-xl">
+          <div class="flex items-center mb-4">
+            <div class="flex">
+              {Array(5).fill(0).map((_, i) => (
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  class="h-5 w-5 text-yellow-300" 
+                  fill="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                </svg>
+              ))}
+            </div>
+          </div>
+          <p class="mb-4">
+            "Swadisht has been a game-changer for me. Their food tastes exactly like home-cooked meals, and the delivery is always on time. Can't recommend them enough!"
+          </p>
+          <div class="font-medium">- Neha Patel</div>
+        </div>
+        
+        <div class="bg-white/10 backdrop-blur-sm p-6 rounded-xl">
+          <div class="flex items-center mb-4">
+            <div class="flex">
+              {Array(5).fill(0).map((_, i) => (
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  class="h-5 w-5 text-yellow-300" 
+                  fill="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                </svg>
+              ))}
+            </div>
+          </div>
+          <p class="mb-4">
+            "The quality and taste of food from Swadisht is unmatched. I've tried many food delivery services, but this one truly lives up to its name of providing homely taste."
+          </p>
+          <div class="font-medium">- Vikram Singh</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
