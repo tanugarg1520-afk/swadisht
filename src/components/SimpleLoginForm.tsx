@@ -50,12 +50,20 @@ export default function SimpleLoginForm() {
     }
   };
   
+  // OTP notification state
+  const [otpSent, setOtpSent] = useState(false);
+  const [otpValue, setOtpValue] = useState("1234"); // Default OTP for demo
+
   // Handle login button click
   const handleLoginClick = () => {
     setIsSubmitting(true);
     
     // Simulate OTP sending
     setTimeout(() => {
+      // Generate a random 4-digit OTP
+      const generatedOtp = Math.floor(1000 + Math.random() * 9000).toString();
+      setOtpValue(generatedOtp);
+      setOtpSent(true);
       setStep(LoginStep.OTP);
       setIsSubmitting(false);
       
@@ -72,6 +80,9 @@ export default function SimpleLoginForm() {
         setTimerCount(count);
         if (count === 0) clearInterval(interval);
       }, 1000);
+      
+      // Show alert with OTP (for demo purposes)
+      alert(`Your OTP is: ${generatedOtp}\n\nIn a real app, this would be sent to your phone.`);
     }, 1500);
   };
   
@@ -79,10 +90,20 @@ export default function SimpleLoginForm() {
   const handleVerifyClick = () => {
     setIsSubmitting(true);
     
-    // Simulate verification
+    // Get entered OTP
+    const enteredOtp = otp.join('');
+    
+    // Verify OTP
     setTimeout(() => {
-      // Navigate to home page after verification
-      window.location.href = "/home";
+      if (enteredOtp === otpValue) {
+        // Correct OTP - navigate to home page
+        alert('OTP verified successfully! Redirecting to home page...');
+        window.location.href = "/home";
+      } else {
+        // Incorrect OTP
+        alert('Incorrect OTP. Please try again.');
+        setIsSubmitting(false);
+      }
     }, 1500);
   };
   
@@ -98,6 +119,13 @@ export default function SimpleLoginForm() {
       setTimerCount(count);
       if (count === 0) clearInterval(interval);
     }, 1000);
+    
+    // Generate new OTP
+    const newOtp = Math.floor(1000 + Math.random() * 9000).toString();
+    setOtpValue(newOtp);
+    
+    // Show alert with new OTP (for demo purposes)
+    alert(`Your new OTP is: ${newOtp}\n\nIn a real app, this would be sent to your phone.`);
   };
   
   return (
@@ -110,9 +138,14 @@ export default function SimpleLoginForm() {
           <p className="text-gray-600 mt-1">Enter your phone number to receive an OTP</p>
         )}
         {step === LoginStep.OTP && (
-          <p className="text-gray-600 mt-1">
-            We've sent a 4-digit code to <span className="font-medium">+91 {phoneNumber}</span>
-          </p>
+          <div>
+            <p className="text-gray-600 mt-1">
+              We've sent a 4-digit code to <span className="font-medium">+91 {phoneNumber}</span>
+            </p>
+            <p className="text-green-600 text-sm mt-1">
+              <strong>OTP sent successfully!</strong> Please check your phone.
+            </p>
+          </div>
         )}
       </div>
       
