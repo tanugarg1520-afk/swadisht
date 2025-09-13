@@ -55,78 +55,139 @@ export default function SimpleLoginForm() {
   const [otpValue, setOtpValue] = useState("1234"); // Default OTP for demo
 
   // Handle login button click
-  const handleLoginClick = () => {
+  const handleLoginClick = async () => {
     setIsSubmitting(true);
     
-    // Simulate OTP sending
-    setTimeout(() => {
-      // Generate a random 4-digit OTP
-      const generatedOtp = Math.floor(1000 + Math.random() * 9000).toString();
-      setOtpValue(generatedOtp);
-      setOtpSent(true);
-      setStep(LoginStep.OTP);
-      setIsSubmitting(false);
+    try {
+      // Call the backend API to send OTP
+      const response = await fetch('http://localhost:5000/api/send-otp', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ phone: phoneNumber })
+      });
       
-      // Focus first OTP input
-      setTimeout(() => {
-        inputRefs.current[0]?.focus();
-      }, 100);
+      const data = await response.json();
       
-      // Start timer
-      let count = 30;
-      setTimerCount(count);
-      const interval = setInterval(() => {
-        count--;
+      if (data.success) {
+        // If we're in development mode, the API will return the OTP
+        if (data.otp) {
+          setOtpValue(data.otp);
+        }
+        
+        setOtpSent(true);
+        setStep(LoginStep.OTP);
+        
+        // Focus first OTP input
+        setTimeout(() => {
+          inputRefs.current[0]?.focus();
+        }, 100);
+        
+        // Start timer
+        let count = 30;
         setTimerCount(count);
-        if (count === 0) clearInterval(interval);
-      }, 1000);
-      
-      // In a real app, this would send an SMS to the user's phone
-      // For demo purposes, we're showing the OTP on screen
-      // IMPORTANT: This would never be done in a real app!
-    }, 1500);
+        const interval = setInterval(() => {
+          count--;
+          setTimerCount(count);
+          if (count === 0) clearInterval(interval);
+        }, 1000);
+      } else {
+        // Handle error
+        alert(data.message || "Failed to send OTP. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error sending OTP:", error);
+      alert("Failed to connect to the server. Please check your internet connection and try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
   
   // Handle verify button click
-  const handleVerifyClick = () => {
+  const handleVerifyClick = async () => {
     setIsSubmitting(true);
     
     // Get entered OTP
     const enteredOtp = otp.join('');
     
-    // Verify OTP
-    setTimeout(() => {
-      if (enteredOtp === otpValue) {
-        // Correct OTP - navigate to home page
-        alert('OTP verified successfully! Redirecting to home page...');
+    try {
+      // Call backend API to verify OTP
+      const response = await fetch('http://localhost:5000/api/verify-otp', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ 
+          phone: phoneNumber, 
+          otp: enteredOtp 
+        })
+      });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        // If verification is successful, redirect to home page
         window.location.href = "/home";
       } else {
         // Incorrect OTP
-        alert('Incorrect OTP. Please try again.');
+        alert(data.message || 'Incorrect OTP. Please try again.');
         setIsSubmitting(false);
       }
-    }, 1500);
+    } catch (error) {
+      console.error("Error verifying OTP:", error);
+      alert("Failed to connect to the server. Please check your internet connection and try again.");
+      setIsSubmitting(false);
+    }
   };
   
   // Handle resend OTP
-  const handleResendOtp = () => {
+  const handleResendOtp = async () => {
     if (timerCount > 0) return;
     
-    // Reset timer
-    let count = 30;
-    setTimerCount(count);
-    const interval = setInterval(() => {
-      count--;
-      setTimerCount(count);
-      if (count === 0) clearInterval(interval);
-    }, 1000);
-    
-    // Generate new OTP
-    const newOtp = Math.floor(1000 + Math.random() * 9000).toString();
-    setOtpValue(newOtp);
-    
-    // In a real app, this would send a new SMS to the user's phone
-    // For demo purposes, we're just updating the displayed OTP
+    try {
+      // Call the backend API to resend OTP
+      const response = await fetch('http://localhost:5000/api/send-otp', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ phone: phoneNumber })
+      });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        // If we're in development mode, the API will return the OTP
+        if (data.otp) {
+          setOtpValue(data.otp);
+        }
+        
+        // Reset timer
+        let count = 30;
+        setTimerCount(count);
+        const interval = setInterval(() => {
+          count--;
+          setTimerCount(count);
+          if (count === 0) clearInterval(interval);
+        }, 1000);
+        
+        // Clear the OTP input fields
+        setOtp(["", "", "", ""]);
+        
+        // Focus first OTP input
+        setTimeout(() => {
+          inputRefs.current[0]?.focus();
+        }, 100);
+        
+        alert("OTP resent successfully!");
+      } else {
+        alert(data.message || "Failed to resend OTP. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error resending OTP:", error);
+      alert("Failed to connect to the server. Please check your internet connection and try again.");
+    }
   };
   
   return (
