@@ -81,8 +81,9 @@ export default function SimpleLoginForm() {
         if (count === 0) clearInterval(interval);
       }, 1000);
       
-      // Show alert with OTP (for demo purposes)
-      alert(`Your OTP is: ${generatedOtp}\n\nIn a real app, this would be sent to your phone.`);
+      // In a real app, this would send an SMS to the user's phone
+      // For demo purposes, we're showing the OTP on screen
+      // IMPORTANT: This would never be done in a real app!
     }, 1500);
   };
   
@@ -124,8 +125,8 @@ export default function SimpleLoginForm() {
     const newOtp = Math.floor(1000 + Math.random() * 9000).toString();
     setOtpValue(newOtp);
     
-    // Show alert with new OTP (for demo purposes)
-    alert(`Your new OTP is: ${newOtp}\n\nIn a real app, this would be sent to your phone.`);
+    // In a real app, this would send a new SMS to the user's phone
+    // For demo purposes, we're just updating the displayed OTP
   };
   
   return (
@@ -142,9 +143,17 @@ export default function SimpleLoginForm() {
             <p className="text-gray-600 mt-1">
               We've sent a 4-digit code to <span className="font-medium">+91 {phoneNumber}</span>
             </p>
-            <p className="text-green-600 text-sm mt-1">
-              <strong>OTP sent successfully!</strong> Please check your phone.
-            </p>
+            <div className="bg-green-50 border border-green-200 rounded-md p-3 mt-3 text-sm">
+              <p className="flex items-center text-green-700">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+                <strong>OTP sent successfully!</strong>
+              </p>
+              <p className="text-gray-700 mt-1">Please enter OTP: <span className="font-bold text-black">{otpValue}</span></p>
+              <p className="text-xs text-gray-500 mt-1">(This is only shown for demo purposes)</p>
+            </div>
           </div>
         )}
       </div>
@@ -262,7 +271,20 @@ export default function SimpleLoginForm() {
         <div className="flex-grow border-t border-gray-200"></div>
       </div>
       
-      <button className="mt-6 w-full flex items-center justify-center gap-2 border border-gray-300 rounded-md p-2 hover:bg-gray-50 transition-colors">
+      <button 
+        onClick={() => {
+          // Show loading state
+          setIsSubmitting(true);
+          
+          // Simulate Google authentication
+          setTimeout(() => {
+            // In a real app, this would integrate with Google Auth API
+            alert('Google login successful! Redirecting to home page...');
+            window.location.href = '/home';
+          }, 1500);
+        }}
+        className="mt-6 w-full flex items-center justify-center gap-2 border border-gray-300 rounded-md p-2 hover:bg-gray-50 transition-colors"
+      >
         <svg className="w-5 h-5" viewBox="0 0 24 24">
           <path
             d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
