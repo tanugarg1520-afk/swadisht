@@ -19,12 +19,28 @@ class SMSService {
 
       // In production, send actual SMS
       if (process.env.NODE_ENV === 'production') {
-        const response = await axios.post('https://control.msg91.com/api/v5/otp', {
+        /*const response = await axios.post('https://control.msg91.com/api/v5/otp', {
           template_id: process.env.TEMPLATE_ID,
           mobile: `91${phone}`, // Adding country code for India
           authkey: process.env.MSG91_API_KEY,
           otp: otp,
-        });
+        });*/
+        //Start Edit
+        const response = await axios.post(
+          'https://control.msg91.com/api/v5/otp',
+          {
+            template_id: process.env.TEMPLATE_ID,
+            mobile: `91${phone}`,
+            otp: otp,
+          },
+          {
+            headers: {
+              authkey: process.env.MSG91_API_KEY,
+              'Content-Type': 'application/json'
+            }
+          }
+        );
+        //End
 
         return { 
           success: true, 
