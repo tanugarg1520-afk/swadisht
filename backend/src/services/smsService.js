@@ -3,17 +3,22 @@ const axios = require("axios");
 class SMSService {
   static async sendOTP(phone, otp) {
     try {
-      const response = await axios.get("https://api.msg91.com/api/v5/otp", {
-        params: {
-          template_id: process.env.MSG91_TEMPLATE_ID, // Get from MSG91 dashboard
-          mobile: "91" + phone, // Add country code
-          authkey: process.env.MSG91_AUTH_KEY,
+      const response = await axios.post(
+        "https://api.msg91.com/api/v5/otp",
+        {
+          template_id: process.env.MSG91_TEMPLATE_ID,
+          mobile: "91" + phone,
           otp: otp,
         },
-      });
+        {
+          headers: {
+            authkey: process.env.MSG91_AUTH_KEY,
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
-      // MSG91 success response
-      if (response.data.type === "success") {
+      if (response.data.type === "success" || response.data.message) {
         return { success: true };
       } else {
         return { success: false, message: response.data };
